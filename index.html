@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f3e9;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Header Section */
+        .header {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://placeholder.com/crescent-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .lantern, .star {
+            position: absolute;
+            opacity: 0;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Main Content */
+        .content-container {
+            text-align: center;
+            z-index: 10;
+            color: white;
+        }
+        
+        .eid-title {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #f7c04a, #f7e04a, #f7c04a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            animation: shimmer 2s infinite;
+            transform-origin: center bottom;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -100% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #f7e04a;
+        }
+        
+        /* Interactive Crescent */
+        .crescent-container {
+            margin: 2rem auto;
+            width: 200px;
+            height: 200px;
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+        
+        .crescent {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f7c04a, #f7da4a);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 30px 5px rgba(247, 192, 74, 0.7);
+        }
+        
+        .crescent::after {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background-color: #f8f3e9;
+            border-radius: 50%;
+            top: -15%;
+            right: -15%;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Card Section */
+        .cards-section {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #444;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #f7c04a, #f7e04a);
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .card-text {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Interactive Message Section */
+        .message-section {
+            padding: 5rem 2rem;
+            background-color: #f8f3e9;
+            text-align: center;
+        }
+        
+        .message-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .message-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid #f7c04a;
+            border-radius: 15px;
+            z-index: -1;
+        }
+        
+        .message-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .message-input:focus {
+            outline: none;
+            border-color: #f7c04a;
+        }
+        
+        .send-btn {
+            background: linear-gradient(45deg, #f7c04a, #f7e04a);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .send-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .message-display {
+            margin-top: 2rem;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 150px;
+            display: none;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 2rem;
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+        
+        .social-icons {
+            margin-bottom: 1rem;
+        }
+        
+        .social-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .social-icon:hover {
+            background-color: #f7c04a;
+            transform: scale(1.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .eid-title {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="floating-elements" id="floatingElements">
+            <!-- JS will add elements here -->
+        </div>
+        
+        <div class="content-container">
+            <h1 class="eid-title">Eid Mubarak</h1>
+            <p class="subtitle">May this Eid bring joy, prosperity, and peace to your life</p>
+            
+            <div class="crescent-container" id="crescentContainer">
+                <div class="crescent"></div>
+            </div>
+            
+            <p class="subtitle">Click on the crescent to see a surprise!</p>
+        </div>
+    </header>
+    
+    <!-- Cards Section -->
+    <section class="cards-section">
+        <h2 class="section-title">Eid Celebrations</h2>
+        
+        <div class="cards-container">
+            <div class="card">
+                <img src="https://placeholder.com/card1.jpg" alt="Eid Prayers" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Eid Prayers</h3>
+                    <p class="card-text">Join the community for special Eid prayers as we gather to celebrate this blessed occasion together.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="https://placeholder.com/card2.jpg" alt="Festive Feast" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Festive Feast</h3>
+                    <p class="card-text">Enjoy delicious traditional dishes prepared with love for family and friends on this special day.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="https://placeholder.com/card3.jpg" alt="Giving Gifts" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Giving Gifts</h3>
+                    <p class="card-text">Spread happiness by exchanging gifts and sharing blessings with loved ones and those less fortunate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Interactive Message Section -->
+    <section class="message-section">
+        <h2 class="section-title">Send Eid Greetings</h2>
+        
+        <div class="message-container">
+            <input type="text" class="message-input" id="nameInput" placeholder="Enter your name">
+            <textarea class="message-input" id="messageInput" placeholder="Write your Eid message here..." rows="4"></textarea>
+            <button class="send-btn" id="sendBtn">Create Greeting</button>
+            
+            <div class="message-display" id="messageDisplay"></div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-icons">
+            <div class="social-icon">f</div>
+            <div class="social-icon">t</div>
+            <div class="social-icon">in</div>
+            <div class="social-icon">ig</div>
+        </div>
+        
+        <p>&copy; 2025 Eid Mubarak Greetings. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create floating elements
+            const floatingElements = document.getElementById('floatingElements');
+            const elementTypes = ['lantern', 'star'];
+            const colors = ['#f7c04a', '#f7e04a', '#f7d04a', '#ffffff'];
+            
+            for (let i = 0; i < 20; i++) {
+                const element = document.createElement('div');
+                const type = elementTypes[Math.floor(Math.random() * elementTypes.length)];
+                element.className = type;
+                
+                // Set styles
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 15}s`;
+                element.style.animationDuration = `${15 + Math.random() * 10}s`;
+                element.style.width = `${20 + Math.random() * 30}px`;
+                element.style.height = `${20 + Math.random() * 30}px`;
+                element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                element.style.borderRadius = type === 'star' ? '50%' : '5px';
+                
+                floatingElements.appendChild(element);
+            }
+            
+            // Interactive crescent
+            const crescentContainer = document.getElementById('crescentContainer');
+            let rotated = false;
+            
+            crescentContainer.addEventListener('click', function() {
+                if (!rotated) {
+                    this.style.transform = 'rotateY(180deg)';
+                    
+                    // Create confetti effect
+                    for (let i = 0; i < 50; i++) {
+                        createConfetti();
+                    }
+                    
+                    rotated = true;
+                    
+                    // After animation completes
+                    setTimeout(() => {
+                        this.style.transform = 'rotateY(0deg)';
+                        rotated = false;
+                    }, 3000);
+                }
+            });
+            
+            function createConfetti() {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'absolute';
+                confetti.style.width = `${5 + Math.random() * 10}px`;
+                confetti.style.height = `${5 + Math.random() * 10}px`;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.left = `${crescentContainer.offsetLeft + Math.random() * crescentContainer.offsetWidth}px`;
+                confetti.style.top = `${crescentContainer.offsetTop + Math.random() * crescentContainer.offsetHeight}px`;
+                confetti.style.zIndex = '100';
+                confetti.style.pointerEvents = 'none';
+                
+                document.body.appendChild(confetti);
+                
+                // Animate
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 3 + Math.random() * 5;
+                let posX = parseFloat(confetti.style.left);
+                let posY = parseFloat(confetti.style.top);
+                const gravity = 0.1;
+                let velocityY = -velocity;
+                
+                const animateConfetti = () => {
+                    velocityY += gravity;
+                    posY += velocityY;
+                    posX += Math.cos(angle) * velocity;
+                    
+                    confetti.style.top = `${posY}px`;
+                    confetti.style.left = `${posX}px`;
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    
+                    if (posY < window.innerHeight) {
+                        requestAnimationFrame(animateConfetti);
+                    } else {
+                        confetti.remove();
+                    }
+                };
+                
+                requestAnimationFrame(animateConfetti);
+            }
+            
+            // Interactive message
+            const nameInput = document.getElementById('nameInput');
+            const messageInput = document.getElementById('messageInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const messageDisplay = document.getElementById('messageDisplay');
+            
+            sendBtn.addEventListener('click', function() {
+                const name = nameInput.value.trim();
+                const message = messageInput.value.trim();
+                
+                if (name && message) {
+                    // Show the display container
+                    messageDisplay.style.display = 'block';
+                    
+                    // Create the greeting
+                    messageDisplay.innerHTML = `
+                        <div style="text-align: center; animation: fadeIn 1s ease;">
+                            <h3 style="color: #f7c04a; margin-bottom: 10px; font-size: 1.5rem;">
+                                Eid Mubarak from ${name}
+                            </h3>
+                            <p style="font-style: italic; line-height: 1.6;">${message}</p>
+                            <div style="margin-top: 20px;">
+                                <span style="color: #f7c04a; font-size: 1.2rem;">★</span>
+                                <span style="color: #f7c04a; font-size: 1.2rem;">★</span>
+                                <span style="color: #f7c04a; font-size: 1.2rem;">★</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Add animation for the greeting
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes fadeIn {
+                            from { opacity: 0; transform: translateY(20px); }
+                            to { opacity: 1; transform: translateY(0); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                } else {
+                    alert('Please enter both your name and a message!');
+                }
+            });
+            
+            // Card hover effects
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const img = this.querySelector('.card-img');
+                    img.style.transition = 'transform 0.5s ease';
+                    img.style.transform = 'scale(1.1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const img = this.querySelector('.card-img');
+                    img.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
