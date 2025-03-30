@@ -1,96 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eid Mubarak 2025</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eid Mubarak Wish</title>
     <style>
-        body {
-            background: url('https://source.unsplash.com/1600x900/?eid,muslim,mosque') no-repeat center center;
-            background-size: cover;
+      body {
+        text-align: center;
+        background: radial-gradient(circle, #fef9f3, #ffdde1);
+        color: #4a235a;
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* height: 100vh; */
+        flex-direction: column;
+        position: relative;
+        /* overflow: hidden; */
+      }
+      .flower-container {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        cursor: pointer;
+        margin-top: 35px;
+        margin-left: 74px;
+      }
+      .flower {
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(circle, #ff9a9e, #fad0c4);
+        border-radius: 50%;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+        transition: transform 0.5s;
+      }
+      .petals {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        top: -15px;
+        left: 39px;
+      }
+      .petals div {
+        width: 40px;
+        height: 80px;
+        background: radial-gradient(circle, #ff758c, #ff7eb3);
+        position: absolute;
+        border-radius: 50%;
+        transform-origin: center bottom;
+        transition: transform 0.5s;
+      }
+      .petals div:nth-child(1) {
+        transform: rotate(0deg) translateY(-20px);
+      }
+      .petals div:nth-child(2) {
+        transform: rotate(45deg) translateY(-20px);
+      }
+      .petals div:nth-child(3) {
+        transform: rotate(90deg) translateY(-20px);
+      }
+      .petals div:nth-child(4) {
+        transform: rotate(135deg) translateY(-20px);
+      }
+      .petals div:nth-child(5) {
+        transform: rotate(180deg) translateY(-20px);
+      }
+      .petals div:nth-child(6) {
+        transform: rotate(225deg) translateY(-20px);
+      }
+      .petals div:nth-child(7) {
+        transform: rotate(270deg) translateY(-20px);
+      }
+      .petals div:nth-child(8) {
+        transform: rotate(315deg) translateY(-20px);
+      }
+      .message-box {
+        font-size: 20px;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+        opacity: 0;
+        transition: opacity 1s;
+      }
+      .hidden {
+        display: none;
+      }
+
+      .gift-container {
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .gift-box {
+        width: 150px;
+        height: 150px;
+        background: linear-gradient(45deg, #f7c04a, #f7e04a);
+        margin: 2rem auto;
+        position: relative;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .gift-box:hover {
+        transform: translateY(-5px) rotate(5deg);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .gift-lid {
+        width: 170px;
+        height: 30px;
+        background: linear-gradient(45deg, #e0a926, #e0b526);
+        position: absolute;
+        top: -15px;
+        left: -10px;
+        border-radius: 5px;
+        z-index: 1;
+        transform-origin: center bottom;
+        transition: transform 0.5s ease;
+      }
+
+      .gift-ribbon {
+        position: absolute;
+        width: 30px;
+        height: 100%;
+        background: #e0a926;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .gift-ribbon::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 30px;
+        background: #e0a926;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+      }
+
+      .gift-box.open .gift-lid {
+        transform: rotateX(-110deg);
+      }
+
+      .gift-message {
+        /* min-height: 1000px; */
+        margin-top: 2rem;
+        font-size: 1.2rem;
+        color: #555;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s, transform 0.5s;
+      }
+
+      .gift-message.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .message-display {
+        margin-top: 2rem;
+        text-align: left;
+        /* background-color: #f9f9f9; */
+        padding: 0.5rem;
+        border-radius: 10px;
+        /* box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); */
+        min-height: 150px;
+        display: none;
+      }
+
+      /* Interactive Message Section */
+      .message-section {
+        padding: 5rem 1rem;
+        /* background-color: #f8f3e9; */
+        text-align: center;
+      }
+
+      .message-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        padding: 0.5rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .message-container::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 2px solid #f7c04a;
+        border-radius: 15px;
+        z-index: -1;
+      }
+
+      .message-input {
+        /* width: 100%; */
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .message-input:focus {
+        outline: none;
+        border-color: #f7c04a;
+      }
+
+      .send-btn {
+        background: linear-gradient(45deg, #fea1a3, #ff758e);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .send-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      }
+      .wheel-container {
             position: relative;
+            width: 200px;
+            height: 200px;
         }
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .wheel {
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 0;
-        }
-        .stars {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        .star {
-            position: absolute;
-            background: white;
-            width: 3px;
-            height: 3px;
             border-radius: 50%;
-            opacity: 0.8;
+            background: conic-gradient(
+                #d63384 0deg 72deg,
+                #ffafcc 72deg 144deg,
+                #ffdde1 144deg 216deg,
+                #f8c291 216deg 288deg,
+                #f78fb3 288deg 360deg
+            );
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            transition: transform 3s ease-out;
         }
-        .content {
-            position: relative;
-            z-index: 1;
+        .spin-button {
+            background-color: #d63384;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+        .spin-button:hover {
+            transform: scale(1.1);
+        }
+        .blessing-message {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .pointer {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: rotate(187deg);
+            z-index: 323;      
+                  width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid black;
         }
     </style>
-</head>
-<body class="flex flex-col items-center justify-center h-screen text-white text-center relative">
-    <div class="overlay"></div>
-    <div class="stars"></div>
-    <div class="content">
-        <div id="greeting" class="text-6xl font-extrabold drop-shadow-lg opacity-0">🌙 Eid Mubarak 2025! 🌙</div>
-        <p class="mt-4 text-lg opacity-0" id="message">May this Eid bring peace, joy, and prosperity to your life.</p>
-        
-        <button id="wishBtn" class="mt-6 px-6 py-2 text-lg font-semibold bg-yellow-500 text-white rounded-lg shadow-lg hover:bg-yellow-600 transition">Click for a Special Wish</button>
-        <div id="wish" class="mt-4 text-xl opacity-0"></div>
+  </head>
+  <body>
+    <h1 style="font-size: 32px; color: #d63384">🌙 Eid Mubarak! 2025🌟</h1>
+    <h3 style="font-family: cursive">From Afreen</h3>
+    <p>Click the flower to reveal your Eid wishes and watch it bloom! 🌸</p>
+    <div class="flower-container" onclick="revealMessage()">
+      <div class="flower" id="flower"></div>
+      <div class="petals" id="petals">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
+    <div class="message-box hidden" id="messageBox"></div>
+    
+    <h4 style="margin-top: 100px;">Eid Mubarak Blessings Wheel</h4>
+    <p>Click the button to spin the wheel and receive a special Eid Blessing! 🎉</p>
+    <div class="wheel-container">
+        <div class="pointer"></div>
+        <div class="wheel" id="wheel"></div>
+    </div>
+    <button class="spin-button" onclick="spinWheel()">Spin the Wheel</button>
+    <p class="blessing-message" id="blessing"></p>
+    
     <script>
-        gsap.to("#greeting", { opacity: 1, y: -20, duration: 2, ease: "bounce.out" });
-        gsap.to("#message", { opacity: 1, delay: 1.5, duration: 2 });
+      let messages = [
+        "May the blooming flowers bring happiness to your life! 🌸",
+        "Eid Mubarak! Wishing you joy and prosperity! 🌼",
+        "May your days be filled with love and peace! 💖",
+        "Celebrate this special day with gratitude and kindness! 🎊",
+      ];
+      let index = 0;
+      let flower = document.getElementById("flower");
+      let petals = document.getElementById("petals").children;
+      let messageBox = document.getElementById("messageBox");
 
-        const wishes = [
-            "Wishing you a blessed and joyous Eid!",
-            "May Allah bless you with endless happiness!",
-            "Eid Mubarak! Stay blessed and grateful!",
-            "May this Eid bring love and peace to your heart!",
-            "Sending you warm wishes for a prosperous Eid!"
-        ];
+      function revealMessage() {
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        msg = messages[randomIndex];
+        // if (index < messages.length) {
+          messageBox.textContent = msg;
+          messageBox.classList.remove("hidden");
+          setTimeout(() => {
+            messageBox.style.opacity = 1;
+          }, 100);
+        //   flower.style.transform = `scale(${1 + index * 0.1})`;
+          for (let i = 0; i < petals.length; i++) {
+            petals[i].style.transform = `rotate(${
+              i * 45
+            }deg) translateY(-30px)`;
+          }
+          index++;
+          launchConfetti();
+        // }
+      }
+      function launchConfetti() {
+        const confettiContainer = document.createElement("div");
+        confettiContainer.style.position = "fixed";
+        confettiContainer.style.top = "0";
+        confettiContainer.style.left = "0";
+        confettiContainer.style.width = "100vw";
+        confettiContainer.style.height = "100vh";
+        confettiContainer.style.pointerEvents = "none";
+        confettiContainer.style.overflow = "hidden";
+        document.body.appendChild(confettiContainer);
 
-        document.getElementById("wishBtn").addEventListener("click", function() {
-            const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
-            document.getElementById("wish").textContent = randomWish;
-            gsap.to("#wish", { opacity: 1, y: -10, duration: 1 });
-        });
+        for (let i = 0; i < 150; i++) {
+          // Increased from 50 to 150
+          const confetti = document.createElement("div");
+          confetti.style.position = "absolute";
+          confetti.style.width = `${Math.random() * 12 + 5}px`; // Varying size (5px to 17px)
+          confetti.style.height = confetti.style.width;
+          confetti.style.background = `hsl(${Math.random() * 20 + 320}, 80%, ${
+            Math.random() * 30 + 60
+          }%)`;
+          confetti.style.borderRadius = "50%";
+          confetti.style.top = "-10px";
+          confetti.style.left = `${Math.random() * 100}vw`;
+          confetti.style.opacity = Math.random() * 0.8 + 0.2;
+          confetti.style.animation = `fall ${
+            Math.random() * 2 + 2
+          }s linear forwards`;
 
-        function createStars() {
-            const starContainer = document.querySelector(".stars");
-            for (let i = 0; i < 100; i++) {
-                let star = document.createElement("div");
-                star.classList.add("star");
-                star.style.top = Math.random() * 100 + "vh";
-                star.style.left = Math.random() * 100 + "vw";
-                star.style.animation = `twinkle ${Math.random() * 5 + 2}s infinite alternate`;
-                starContainer.appendChild(star);
-            }
+          confettiContainer.appendChild(confetti);
+
+          setTimeout(() => confetti.remove(), 3000);
         }
-        createStars();
+
+        setTimeout(() => confettiContainer.remove(), 3500);
+      }
+      const style = document.createElement("style");
+      style.innerHTML = `
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(${Math.random() * 360}deg);
+        opacity: 0;
+    }
+}`;
+      document.head.appendChild(style);
+      // ===== Gift Box Animation =====
+      const eidWishes = [
+        "May this festive season bring hope, joy, and peace to your life. Happy Eid!",
+        "Wishing you and your family a wonderful celebration filled with happiness and prosperity.",
+        "May this special occasion bring moments of joy and reflection. Eid Mubarak!",
+        "On this special day, may you be blessed with happiness, success, and prosperity. Happy Eid!",
+        "May this Eid bring joy, health, and abundance to you and your loved ones. Warm wishes!",
+        "Sending you warm wishes on Eid. May it bring your heart all the happiness and joy deserved!",
+      ];
+      // ===== Interactive Message Section =====
+      sendBtn.addEventListener("click", function () {
+        const name = nameInput.value.trim();
+        const randomIndex = Math.floor(Math.random() * eidWishes.length);
+        msg = eidWishes[randomIndex];
+        if (name) {
+          // Create personalized greeting card
+          messageDisplay.style.display = "block";
+          messageDisplay.innerHTML =
+            `
+                <div style="text-align: center; padding: 1rem; border: 2px solid #f7c04a; border-radius: 10px; background: #fff4f6;">
+                    <h3 style="color: #ff758c; margin-bottom: 1rem;">Eid Greetings from Afreen</h3>
+                    <p style="font-style: italic; line-height: 1.6;">Dear ${name}, ` +
+            msg +
+            `</p>
+                    <div style="margin-top: 1rem; font-size: 1.5rem; color: #ff3f3f;">Eid Mubarak! 🌙</div>
+                </div>
+            `;
+
+          // Clear inputs
+          nameInput.value = "";
+        } else {
+          alert("Please enter both your name and message");
+        }
+      });
+      // giftBox.addEventListener('click', function() {
+      //     // Open the gift box
+      //     this.classList.toggle('open');
+
+      //     // If opened, show surprise message
+      //     if (this.classList.contains('open')) {
+      //         const randomSurprise = giftSurprises[Math.floor(Math.random() * giftSurprises.length)];
+      //         giftMessage.textContent = randomSurprise;
+      //         giftMessage.classList.add('show');
+      //     } else {
+      //         // If closed, hide message
+      //         giftMessage.classList.remove('show');
+      //     }
+      // });
     </script>
-    <style>
-        @keyframes twinkle {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
+      
+      <script>
+        function spinWheel() {
+            const wheel = document.getElementById("wheel");
+            const blessings = [
+                "🤲 May Allah bless you with endless happiness!",
+                "💖 Your heart will be filled with joy and peace!",
+                "🌟 May your prayers be answered soon!",
+                "🎉 Your Eid will be full of laughter and love!",
+                "😊 Allah's mercy will shine upon you!"
+            ];
+            
+            let randomDegree = Math.floor(3600 + Math.random() * 360);
+            wheel.style.transform = `rotate(${randomDegree}deg)`;
+            
+            setTimeout(() => {
+                const index = Math.floor((randomDegree % 360) / 72);
+                document.getElementById("blessing").textContent = blessings[index];
+                document.getElementById("blessing").style.opacity = 1;
+            }, 3000);
         }
-    </style>
-</body>
+    </script>
+  </body>
 </html>
